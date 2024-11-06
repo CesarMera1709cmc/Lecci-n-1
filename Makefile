@@ -1,21 +1,22 @@
 
 CC = gcc
-CFLAGS = -Wall -std=c99
-OBJ = main.o menu.o datos.o
+CFLAGS = -Wall -g
+OBJ = main.o datos.o menu.o
+PROGRAMA = TAERA1
 
-all: programa
+all: $(PROGRAMA)
 
-programa: $(OBJ)
-	$(CC) $(CFLAGS) -o programa $(OBJ) -lm
+$(PROGRAMA): $(OBJ)
+	$(CC) $(CFLAGS) -o $(PROGRAMA) $(OBJ)
 
-main.o: main.c menu.h datos.h
+main.o: main.c menu.h
 	$(CC) $(CFLAGS) -c main.c
-
-menu.o: menu.c menu.h datos.h
-	$(CC) $(CFLAGS) -c menu.c
 
 datos.o: datos.c datos.h
 	$(CC) $(CFLAGS) -c datos.c
 
+menu.o: menu.c menu.h datos.h
+	$(CC) $(CFLAGS) -c menu.c
 clean:
-	rm -f *.o programa
+	rm -f $(OBJ) $(PROGRAMA)
+
